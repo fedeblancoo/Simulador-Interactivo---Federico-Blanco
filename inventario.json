@@ -1,0 +1,44 @@
+[
+    {
+      "id": 0, 
+      "nombre": "Abrigo", 
+      "precio": 5000, 
+      "imagen": "./img/abrigo.jpg", 
+      "cantidad":1
+    },
+    {
+      "id": 1, 
+      "nombre": "Borcegos",
+      "precio": 4100, 
+      "imagen": "./img/borcegos.jpg", 
+      "cantidad":1
+    },
+    {
+      "id": 2, 
+      "nombre": "Cartera", 
+      "precio": 2500, 
+      "imagen": "./img/cartera.jpg", 
+      "cantidad":1
+    },
+    {
+      "id": 3, 
+      "nombre": "Chaleco", 
+      "precio": 3500, 
+      "imagen": "./img/chaleco.jpg", 
+      "cantidad":1
+    },
+    {
+      "id": 4, 
+      "nombre": "Falda", 
+      "precio": 3200, 
+      "imagen": "./img/falda.jpg", 
+      "cantidad":1
+    },
+    {
+      "id": 5, 
+      "nombre": "Top", 
+      "precio": 3700, 
+      "imagen": "./img/top.jpg", 
+      "cantidad":1
+    }
+]

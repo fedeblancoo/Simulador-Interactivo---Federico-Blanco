@@ -1,0 +1,61 @@
+body {
+    font-size: 62.5%;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    text-align: center;
+    background-color: violet;
+    border: 1px solid black;
+}
+
+header h1 {
+    background-color: yellow;
+    border: 1px solid black;
+    font-size: 3rem;
+    padding: 0 1.5rem;
+    display: inline-block;
+}
+
+header h2 {
+    font-size: 1.5rem ;
+}
+
+button {
+    cursor: pointer;
+}
+
+p {
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.subtotal {
+    font-style: oblique;
+}
+
+.div-general {
+    
+    display: grid;
+    grid-template-columns: 55% 45%;
+    grid-template-rows: auto;
+    grid-template-areas: "tarjetas carrito";
+}
+
+.row {
+    grid-area: tarjetas;
+}
+
+.carrito {
+    background-color: pink;
+    border: 1px solid black;
+    grid-area: carrito;
+    margin-left: 1rem;
+}
+
+@media (max-width: 575px) {
+    .div-general {
+        grid-template-columns: 50% 50%;
+    }
+}
