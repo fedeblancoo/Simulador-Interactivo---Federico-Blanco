@@ -10,14 +10,13 @@ class Cliente {
     this.nombre = nombre;
     this.direccion = direccion;
     this.mail = mail;
-    
   }
 }
 
 //TARJETA DE PRODUCTOS EN EL HTML
 
 const imprimirProductos = async() => {
-  const datos  = await fetch('../inventario.json');
+  const datos  = await fetch('js/inventario.json');
   const inventario = await datos.json();
 
   inventario.forEach ((elem) => {
@@ -33,7 +32,6 @@ const imprimirProductos = async() => {
     divMain.appendChild(divProductos);
   
     const boton = document.getElementById(`agregar${elem.id}`);
-  
     boton.addEventListener("click", () => {
       buscarProducto(elem.id);
     });
@@ -52,12 +50,13 @@ function productosEnStorage () {
     carrito = JSON.parse (itemsEnStorage);
     mostrarCarrito();
   };
+  
 };
 
 // FUNCION DE BUSQUEDA DE PRODUCTOS REPETIDOS EN ARRAY CARRITO
 
 const buscarProducto = async (idProd) => {
-  const datos  = await fetch('../inventario.json');
+  const datos  = await fetch('js/inventario.json');
   const inventario = await datos.json();
   const objetoClickeado = inventario.find((elem) => elem.id === idProd);
   const buscarEnCarrito = carrito.find ((e) => {return e.id === objetoClickeado.id});
@@ -126,12 +125,11 @@ function restarCantidad (idProd) {
 
 };
 
-
 //llAMADO A FUNCION DE CHEKEO EN LOCALSTORAGE
 
 productosEnStorage()
 
-// FUNCION BORRAR CARRITO ENTERO      // SWEETALERT 
+// SWEETALERT PREGUNTA BORRAR CARRITO
 
 function alertaBorrarCarrito(){
   Swal.fire({
@@ -153,42 +151,35 @@ function alertaBorrarCarrito(){
   })
 };
 
+// FUNCION BORRAR CARRITO ENTERO      
 
 function borrarCarrito () {
-  localStorage.clear();
-      
-      carritoGeneral.innerHTML= "";
-      carrito.splice(0,carrito.length);
-      total = 0;
-      console.log(total)
-      
-}
+  localStorage.clear();  
+  carritoGeneral.innerHTML= "";
+  carrito.splice(0,carrito.length);
+  total = 0;
+  location.reload()
+};
 
-//FUNCION BORRAR ELEMENTO
+//FUNCION BORRAR ELEMENTO DEL CARRITO
 
 const borrarProducto = (idProd) => {
-  
-
-if (carrito.length === 1) {
-  borrarCarrito()
-  location.reload()
+  if (carrito.length === 1) {
+    borrarCarrito()
+    location.reload()
   } else {
-    
     const elementoAEliminar = carrito.find((e) => e.id === idProd);
-
-  carrito = carrito.filter ((elem) => { return elem !== elementoAEliminar})
-  console.log(carrito);
+    carrito = carrito.filter ((elem) => { return elem !== elementoAEliminar})
+    console.log(carrito);
   }
-
   mostrarCarrito();
 };
 
 // CONFIRMAR COMPRA 
 
 function confirmarCompra () {
-  carritoGeneral.innerHTML = "";
-  div = document.createElement('div')
-
+  divTotalCarrito.innerHTML = "";
+  const div = document.createElement('div')
   div.innerHTML = `
   <form action="" method="GET" enctype="multipart/form-data">
         <label for="nombre">Nombre:</label>        
@@ -202,20 +193,19 @@ function confirmarCompra () {
             <br>
         
   </form>
-  <button id="submit">Enviar</button>
+  <button id="submit">Enviar</button> <br>
+  <p><b> TOTAL: ${total} <b/></p>
   `;
-
-  carritoGeneral.appendChild (div)
+  divTotalCarrito.appendChild (div)
 
   let submit = document.getElementById('submit')
-
-  
-
   submit.addEventListener('click', () => {
     mensajeFinal()
   })
 
 }
+
+//ALERTA FINAL DE CIERRE
 
 mensajeFinal = (cliente) => {
   let nombre = document.getElementById('nombre').value;
@@ -230,13 +220,12 @@ mensajeFinal = (cliente) => {
     confirmButtonColor: '#3085d6',
     confirmButtonText: 'Continuar'
   }).then((result) => {
-    if (result.isConfirmed) {
       Swal.fire(
         borrarCarrito(),
         location.reload()
       )
     }
-  });
+  );
 }
 
 
