@@ -143,10 +143,7 @@ function alertaBorrarCarrito(){
     confirmButtonText: '¡Borrar!'
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire(
-        '¡Carrito borrado!',
          borrarCarrito ()
-      )
     }
   })
 };
@@ -212,20 +209,28 @@ mensajeFinal = (cliente) => {
   let direccion = document.getElementById('adress').value;
   let mail = document.getElementById('mail').value;
   let cliente1 = new Cliente (nombre, direccion, mail)
-  console.log(cliente1)
+  
 
-  Swal.fire({
-    title: `MUCHAS GRACIAS ${cliente1.nombre} POR SU COMPRA ❤️. Pronto recibira un correo en ${cliente1.mail} con los detalles del envio a: ${cliente1.direccion}`,
-    icon: 'success',
-    confirmButtonColor: '#3085d6',
-    confirmButtonText: 'Continuar'
-  }).then((result) => {
-      Swal.fire(
-        borrarCarrito(),
-        location.reload()
-      )
-    }
-  );
+  if (nombre === "" || direccion==="" || mail===""){
+    Swal.fire({
+      title: "Por favor, completa los campos.",
+      confirmButtonText: 'Continuar'
+    })
+  } else {
+    Swal.fire({
+      title: `MUCHAS GRACIAS ${cliente1.nombre} POR SU COMPRA ❤️. Pronto recibira un correo en ${cliente1.mail} con los detalles del envio a: ${cliente1.direccion}`,
+      icon: 'success',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Continuar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          borrarCarrito(),
+          location.reload()
+        )
+      }
+    });
+  }
 }
 
 
